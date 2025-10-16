@@ -10,34 +10,63 @@
   </div>
   {{ end }}
 
-  <div class="space-y-6">
+  <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3 auto-rows-fr">
     {{ range .Pages }}
-    <article class="card-warm p-6 mb-6 border-sunny">
-      <h2 class="text-2xl font-semibold mb-2">
-        <a href="{{ .Permalink }}" class="link-warm hover:underline">
-          {{ .Title }}
-        </a>
-      </h2>
-      <div class="text-sunshine-600 text-sm mb-3">
-        <time datetime="{{ .Date.Format "2006-01-02" }}">
-          {{ .Date.Format "January 2, 2006" }}
-        </time>
-        {{ if .Params.tags }}
-        <span class="mx-2">•</span>
-        {{ range $index, $tag := .Params.tags }}
-          {{ if $index }}, {{ end }}
-          <a href="{{ "tags/" | relURL }}{{ $tag | urlize }}" class="text-warm-500 hover:text-warm-600">
-            {{ $tag }}
+    <article class="group card-warm p-5 max-w-sm mx-auto w-full hover:scale-105 transition-all duration-300 hover:shadow-2xl hover:shadow-sunshine-200/50 border-sunny hover:-translate-y-1">
+      <!-- Header with gradient title -->
+      <header class="mb-3">
+        <h2 class="text-lg font-bold mb-2 bg-gradient-to-r from-sunshine-600 to-warm-500 bg-clip-text text-transparent group-hover:from-sunshine-700 group-hover:to-warm-600 transition-all duration-300 leading-tight">
+          <a href="{{ .Permalink }}" class="hover:underline decoration-2 underline-offset-4">
+            {{ .Title }}
           </a>
-        {{ end }}
-        {{ end }}
+        </h2>
+
+        <!-- Meta information with compact styling -->
+        <div class="flex items-center gap-2 text-xs text-gray-500 mb-3">
+          <time datetime="{{ .Date.Format "2006-01-02" }}" class="flex items-center gap-1">
+            <svg class="w-3 h-3 text-sunshine-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+            </svg>
+            {{ .Date.Format "Jan 2, 2006" }}
+          </time>
+
+          {{ if .Params.tags }}
+          <span class="text-gray-300">•</span>
+          <div class="flex gap-1">
+            {{ range $index, $tag := first 2 .Params.tags }}
+            <a href="{{ "tags/" | relURL }}{{ $tag | urlize }}" class="px-2 py-0.5 bg-sunshine-50 text-sunshine-600 rounded-full text-xs font-medium hover:bg-sunshine-100 transition-colors">
+              {{ $tag }}
+            </a>
+            {{ end }}
+            {{ if gt (len .Params.tags) 2 }}
+            <span class="px-1 py-0.5 text-xs text-gray-400">+{{ sub (len .Params.tags) 2 }}</span>
+            {{ end }}
+          </div>
+          {{ end }}
+        </div>
+      </header>
+
+      <!-- Short description/teaser -->
+      {{ $plainSummary := .Plain | safeHTML }}
+      {{ $shortDescription := cond (gt (len $plainSummary) 120) (printf "%s..." (substr $plainSummary 0 120)) $plainSummary }}
+      {{ if $shortDescription }}
+      <div class="mb-4">
+        <p class="text-gray-600 text-sm leading-relaxed">{{ $shortDescription }}</p>
       </div>
-      {{ if .Summary }}
-      <p class="text-gray-700 mb-3">{{ .Summary }}</p>
       {{ end }}
-      <a href="{{ .Permalink }}" class="link-warm text-sm font-medium">
-        Read more →
-      </a>
+
+      <!-- Footer with read more link -->
+      <footer>
+        <a href="{{ .Permalink }}" class="inline-flex items-center gap-2 text-sunshine-600 hover:text-sunshine-700 font-medium text-sm group/link">
+          Discover more
+          <svg class="w-4 h-4 transition-transform group-hover/link:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+          </svg>
+        </a>
+      </footer>
+
+      <!-- Decorative gradient border -->
+      <div class="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-sunshine-400 via-warm-400 to-sunshine-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
     </article>
     {{ end }}
   </div>

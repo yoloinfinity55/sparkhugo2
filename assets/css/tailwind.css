@@ -37,4 +37,17 @@
   .border-sunny {
     @apply border-l-4 border-warm-400;
   }
+
+  /* Line clamp utility */
+  .line-clamp-3 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+
+  /* Enhanced hover effects */
+  .hover\:shadow-sunshine-200\/50:hover {
+    box-shadow: 0 25px 50px -12px rgba(254, 240, 138, 0.5), 0 0 0 1px rgba(254, 240, 138, 0.05);
+  }
 }
