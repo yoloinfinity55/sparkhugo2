@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-gradient-to-br from-sunshine-50 via-white to-warm-50;
+    @apply text-gray-800;
+    @apply min-h-screen;
+  }
+}
+
+@layer components {
+  /* Warm blue links */
+  .link-warm {
+    @apply text-sunshine-600 hover:text-sunshine-700 transition-colors duration-200;
+  }
+
+  /* Sunshine buttons */
+  .btn-sunshine {
+    @apply bg-gradient-to-r from-sunshine-500 to-sunshine-600;
+    @apply text-white px-6 py-2 rounded-lg;
+    @apply hover:from-sunshine-600 hover:to-sunshine-700;
+    @apply shadow-md hover:shadow-lg;
+    @apply transition-all duration-200;
+  }
+
+  /* Warm card styles */
+  .card-warm {
+    @apply bg-white/80 backdrop-blur-sm;
+    @apply border border-sunshine-100;
+    @apply rounded-lg shadow-sm;
+    @apply hover:shadow-md transition-shadow duration-200;
+  }
+
+  /* Sunny accent border */
+  .border-sunny {
+    @apply border-l-4 border-warm-400;
+  }
+}

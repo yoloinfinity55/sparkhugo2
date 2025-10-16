@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode | default "en" }}">
+<head>
+  {{ partial "head.html" . }}
+</head>
+<body>
+  {{ partial "navbar.html" . }}
+  
+  <main>
+    {{ block "main" . }}{{ end }}
+  </main>
+
+  <footer class="bg-white/80 backdrop-blur-sm border-t border-sunshine-200 mt-12">
+    <div class="max-w-6xl mx-auto px-4 py-8">
+      <div class="text-center text-gray-600">
+        <p class="mb-2">
+          <span class="bg-gradient-to-r from-sunshine-600 to-warm-500 bg-clip-text text-transparent font-semibold">
+            {{ .Site.Title }}
+          </span>
+        </p>
+        <p class="text-sm">
+          Built with ☀️ using <a href="https://gohugo.io" class="link-warm">Hugo</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

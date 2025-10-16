@@ -1,0 +1,13 @@
+{
+  "name": "sparkhugo",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "tailwindcss -i ./assets/css/tailwind.css -o ./static/css/styles.css --watch",
+    "build": "tailwindcss -i ./assets/css/tailwind.css -o ./static/css/styles.css --minify"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.0",
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.32"
+  }
+}

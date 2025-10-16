@@ -1,0 +1,58 @@
+{{ define "main" }}
+<div class="min-h-screen flex items-center justify-center px-4">
+  <div class="text-center max-w-3xl">
+    <!-- Sunshine decoration -->
+    <div class="mb-8 flex justify-center">
+      <div class="w-24 h-24 bg-gradient-to-br from-warm-300 to-sunshine-400 rounded-full animate-pulse shadow-lg"></div>
+    </div>
+
+    <!-- Main heading with warm gradient -->
+    <h1 class="text-6xl font-bold mb-4 bg-gradient-to-r from-sunshine-600 via-sunshine-500 to-warm-500 bg-clip-text text-transparent">
+      {{ .Site.Title }}
+    </h1>
+    
+    <p class="text-xl text-gray-600 mb-8">
+      Welcome to a sunny corner of the web ☀️
+    </p>
+
+    <!-- Content with warm styling -->
+    <div class="prose prose-lg mx-auto mb-8 text-gray-700">
+      {{ .Content }}
+    </div>
+
+    <!-- Recent posts with warm cards -->
+    {{ $posts := where .Site.RegularPages "Type" "posts" }}
+    {{ if $posts }}
+    <div class="mt-12">
+      <h2 class="text-3xl font-bold mb-6 text-sunshine-700">Recent Posts</h2>
+      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {{ range first 6 $posts }}
+        <article class="card-warm p-6 text-left">
+          <h3 class="text-xl font-semibold mb-2">
+            <a href="{{ .Permalink }}" class="link-warm hover:underline">
+              {{ .Title }}
+            </a>
+          </h3>
+          <div class="text-sm text-sunshine-600 mb-3">
+            {{ .Date.Format "January 2, 2006" }}
+          </div>
+          {{ if .Summary }}
+          <p class="text-gray-600 text-sm mb-3">{{ .Summary }}</p>
+          {{ end }}
+          <a href="{{ .Permalink }}" class="text-sunshine-600 hover:text-sunshine-700 text-sm font-medium">
+            Read more →
+          </a>
+        </article>
+        {{ end }}
+      </div>
+      
+      <div class="mt-8">
+        <a href="/posts/" class="btn-sunshine inline-block">
+          View All Posts
+        </a>
+      </div>
+    </div>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

@@ -1,0 +1,5 @@
+baseURL = "https://yoloinfinity55.github.io/"
+languageCode = "en-us"
+title = "sparkhugo"
+# theme = ""
+publishDir = "public"
